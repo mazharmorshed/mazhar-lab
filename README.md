@@ -1,48 +1,89 @@
-# Astro Starter Kit: Basics
+# Mazhar Lab
 
-```sh
-npm create astro@latest -- --template basics
+A computer science reference implementation with interactive algorithm visualizations and WebAssembly-powered examples.
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue.svg)](https://www.typescriptlang.org/)
+[![Astro](https://img.shields.io/badge/Astro-4.0.4-orange.svg)](https://astro.build/)
+[![React](https://img.shields.io/badge/React-19.0.0-blue.svg)](https://reactjs.org/)
+[![WebAssembly](https://img.shields.io/badge/WebAssembly-3.3.0-green.svg)](https://webassembly.org/)
+
+## Features
+
+- Interactive algorithm visualizations
+- Native C++ implementations with WebAssembly
+- Reference implementations of CS concepts
+- Modern web interface
+
+## Setup
+
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Set up Emscripten**
+   ```bash
+   git clone https://github.com/emscripten-core/emsdk.git
+   cd emsdk
+   ./emsdk install latest
+   ./emsdk activate latest
+   source ./emsdk_env.sh
+   ```
+
+3. **Build and run**
+   ```bash
+   npm run build:wasm
+   npm run dev
+   ```
+
+## Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
-│   └── favicon.svg
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── cpp/                 # C++ source files
+│   ├── components/         
+│   │   ├── ui/             # UI components
+│   │   └── visualizers/    # Visualizations
+│   ├── lib/                # Utilities
+│   ├── pages/              # Content pages
+│   ├── styles/             # Global styles
+│   └── types/              # TypeScript types
+├── public/                 # Static assets
+└── scripts/               # Build scripts
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Reference Topics
 
-## 🧞 Commands
+- **Algorithms**: Sorting, Searching, Graph Algorithms
+- **Data Structures**: Arrays, Trees, Hash Maps
+- **Systems**: Processes, Networking, OS Concepts
+- **AI & Math**: Machine Learning, Neural Networks
 
-All commands are run from the root of the project, from a terminal:
+## Commands
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command | Action |
+|---------|--------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run build:wasm` | Build WebAssembly modules |
 
-## 👀 Want to learn more?
+## Development
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Prerequisites
+- Node.js 18+
+- Emscripten
+- C++ compiler
+
+### WebAssembly Development
+1. Add C++ code in `src/cpp/`
+2. Run `npm run build:wasm`
+3. Import the `.wasm` module in TypeScript
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file
+
+## Contact
+
+Project Link: [https://github.com/mazhar11-cou/mazhar-lab](https://github.com/mazhar11-cou/mazhar-lab)

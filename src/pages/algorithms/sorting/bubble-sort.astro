@@ -1,0 +1,380 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { CodeBlock } from '@/components/ui/code-block';
+import { getSourceFile } from '@/lib/utils/getSourceFile';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { 
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { BubbleSortDemo } from '@/components/demos/BubbleSortDemo';
+
+const bubbleSortSource = getSourceFile('bubble_sort.cpp');
+---
+
+<PageLayout>
+    <article class="space-y-8">
+        {/* Title and Introduction */}
+        <section class="space-y-12 mb-12">
+            <div class="space-y-4">
+                <div class="space-y-2">
+                    <h1 class="text-4xl font-bold mb-4">Bubble Sort Algorithm</h1>
+                    <div class="flex flex-wrap gap-2">
+                        <Badge variant="outline" className="px-3">
+                            <span class="font-semibold">Category:</span>
+                            <span class="ml-1">Sorting</span>
+                        </Badge>  
+                    </div>
+                </div>
+
+                <div class="">
+                    <Card className="p-6 space-y-4">
+                        <h2 class="text-lg font-semibold">Overview</h2>
+                        <p class="text-muted-foreground">
+                            Bubble Sort is one of the simplest sorting algorithms that repeatedly steps through the list, 
+                            comparing and swapping adjacent elements until the entire list is sorted. Like bubbles rising to 
+                            the surface, larger elements "float" to their correct positions. With a time complexity of O(n²), 
+                            it performs in-place sorting and maintains stability by preserving the relative order of equal elements.
+                        </p>
+                        <h4 class="text-lg font-semibold">Key Characteristics</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-2">
+                                <div class="h-5 w-5 flex-none rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                </div>
+                                <span class="text-muted-foreground">Time Complexity: O(n²) in average and worst case, O(n) in best case</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <div class="h-5 w-5 flex-none rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                </div>
+                                <span class="text-muted-foreground">Space Complexity: O(1) auxiliary space (in-place sorting)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <div class="h-5 w-5 flex-none rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                </div>
+                                <span class="text-muted-foreground">Stable sorting: maintains relative order of equal elements</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <div class="h-5 w-5 flex-none rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                </div>
+                                <span class="text-muted-foreground">Early termination optimization for nearly sorted data</span>
+                            </li>
+                        </ul>
+                    </Card>
+                </div>
+
+                <Card className="p-4 bg-muted/50">
+                    <div class="flex items-center gap-4">
+                        <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-none">
+                            <div class="h-2 w-2 rounded-full bg-primary"></div>
+                        </div>
+                        <p class="text-sm text-muted-foreground">
+                            <span class="font-medium">Pro Tip:</span> While not suitable for large datasets, Bubble Sort's simplicity 
+                            makes it an excellent choice for teaching sorting concepts and handling small, nearly-sorted collections.
+                        </p>
+                    </div>
+                </Card>
+            </div>
+        </section>
+
+        {/* Algorithm Steps */}
+        <section class="space-y-4 mb-12">
+            <h2 class="text-2xl font-semibold">Algorithm Steps</h2>
+            <div class="">
+                <Card className="p-6">
+                    <ol class="space-y-6">
+                        <li class="relative pl-8">
+                            <div class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium">
+                                1
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium leading-none">Start with First Element</h4>
+                                <p class="text-sm text-muted-foreground">
+                                    Begin at the start of the array and prepare to compare adjacent elements.
+                                    This marks the beginning of a new pass through the array.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="relative pl-8">
+                            <div class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium">
+                                2
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium leading-none">Compare Adjacent Elements</h4>
+                                <p class="text-sm text-muted-foreground">
+                                    Compare current element with the next one. If the current element is larger,
+                                    swap them to maintain ascending order.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="relative pl-8">
+                            <div class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium">
+                                3
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium leading-none">Move to Next Pair</h4>
+                                <p class="text-sm text-muted-foreground">
+                                    Advance to the next pair of elements and repeat the comparison process.
+                                    Continue until reaching the end of unsorted portion.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="relative pl-8">
+                            <div class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium">
+                                4
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium leading-none">Complete a Pass</h4>
+                                <p class="text-sm text-muted-foreground">
+                                    After each pass, the largest unsorted element "bubbles up" to its correct position.
+                                    The last position in the unsorted portion is now sorted.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="relative pl-8">
+                            <div class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium">
+                                5
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium leading-none">Repeat Until Sorted</h4>
+                                <p class="text-sm text-muted-foreground">
+                                    Start a new pass from the beginning. Continue this process until no swaps
+                                    are needed in a complete pass, indicating the array is sorted.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="relative pl-8">
+                            <div class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-warning bg-background text-sm font-medium">
+                                ✓
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium leading-none">Optimization Note</h4>
+                                <p class="text-sm text-muted-foreground">
+                                    Each pass reduces the unsorted portion by one element. We can optimize by
+                                    reducing the comparison range after each pass.
+                                </p>
+                            </div>
+                        </li>
+                    </ol>
+                </Card>
+            </div>
+        </section>
+
+        {/* Implementations */}
+        <section class="space-y-6 mb-12">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold">Implementations</h2>
+                <Badge variant="outline" className="px-3">2 Versions</Badge>
+            </div>
+            
+            <div class="grid gap-8">
+                {/* Basic Implementation */}
+                <Card className="overflow-hidden">
+                    <div class="border-b p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold">Basic Implementation</h3>
+                            <Badge>C-Style</Badge>
+                        </div>
+                        <p class="text-muted-foreground">
+                            A straightforward C-style implementation using WASM bindings. This version focuses on clarity 
+                            and simplicity, making it easy to understand the core algorithm.
+                        </p>
+                    </div>
+
+                    <div class="p-6 bg-muted/5 border-b">
+                        {bubbleSortSource && (
+                            <CodeBlock 
+                                code={bubbleSortSource.code}
+                                filename={bubbleSortSource.path}
+                                client:visible
+                            />
+                        )}
+                    </div>
+
+                    {/* Demo attached to Basic Implementation */}
+                    <div class="p-6 border-t bg-muted/5">
+                        <h4 class="text-lg font-semibold mb-4">Try It Out</h4>
+                        <BubbleSortDemo client:visible />
+                    </div>
+                </Card>
+
+                {/* Modern Implementation */}
+                <Card className="overflow-hidden">
+                    <div class="border-b p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold">Modern Implementation</h3>
+                            <Badge>C++ STL</Badge>
+                        </div>
+                        <p class="text-muted-foreground">
+                            A more idiomatic C++ implementation using STL features. This version shows how to write
+                            the same algorithm in a more maintainable and type-safe way.
+                        </p>
+                    </div>
+
+                    <div class="p-6 bg-muted/5 border-b">
+                        <CodeBlock 
+                            code={`template<typename T>
+void bubble_sort(std::vector<T>& arr) {
+    bool swapped;
+    for (size_t i = 0; i < arr.size() - 1; i++) {
+        swapped = false;
+        for (size_t j = 0; j < arr.size() - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                std::swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) break;  // Early termination if already sorted
+    }
+}`}
+                            filename="bubble_sort_std.cpp"
+                            client:visible
+                        />
+                    </div>
+                </Card>
+            </div>
+        </section>
+
+        {/* Performance Analysis */}
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold">Performance Analysis</h2>
+                <Badge variant="outline" className="px-3">
+                    <span class="font-semibold">Overall:</span>
+                    <span class="ml-1">O(n²)</span>
+                </Badge>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-2">
+                <Card className="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <div class="h-4 w-4 rounded-sm bg-primary/60"></div>
+                            </div>
+                            <h3 class="text-lg font-semibold">Time Complexity</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">Best Case</span>
+                                    <Badge variant="outline" className="bg-success/10 text-success">O(n)</Badge>
+                                </div>
+                                <p class="text-sm text-muted-foreground">
+                                    Already sorted array, early termination after first pass
+                                </p>
+                            </li>
+                            <li class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">Average Case</span>
+                                    <Badge variant="outline" className="bg-warning/10 text-warning">O(n²)</Badge>
+                                </div>
+                                <p class="text-sm text-muted-foreground">
+                                    Random array, requires ~n²/2 comparisons
+                                </p>
+                            </li>
+                            <li class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">Worst Case</span>
+                                    <Badge variant="outline" className="bg-destructive/10 text-destructive">O(n²)</Badge>
+                                </div>
+                                <p class="text-sm text-muted-foreground">
+                                    Reverse sorted array, requires maximum comparisons
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </Card>
+
+                <Card className="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <div class="h-4 w-4 rounded-sm bg-primary/60"></div>
+                            </div>
+                            <h3 class="text-lg font-semibold">Space Complexity</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">Auxiliary Space</span>
+                                    <Badge variant="outline" className="bg-success/10 text-success">O(1)</Badge>
+                                </div>
+                                <p class="text-sm text-muted-foreground">
+                                    Only requires a single temporary variable for swapping
+                                </p>
+                            </li>
+                            <li class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">In-Place Sorting</span>
+                                    <Badge variant="outline" className="bg-success/10 text-success">Yes</Badge>
+                                </div>
+                                <p class="text-sm text-muted-foreground">
+                                    Modifies the input array directly without extra space
+                                </p>
+                            </li>
+                            <li class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">Stability</span>
+                                    <Badge variant="outline" className="bg-success/10 text-success">Stable</Badge>
+                                </div>
+                                <p class="text-sm text-muted-foreground">
+                                    Maintains relative order of equal elements
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </Card>
+            </div>
+        </section>
+    </article>
+</PageLayout>
+
+<script>
+import { createSortArray, runBubbleSort } from '@/lib/algorithms/sorting';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('sortForm');
+    const results = document.getElementById('results');
+    const inputArray = document.getElementById('inputArray');
+    const outputArray = document.getElementById('outputArray');
+    const arraySize = document.getElementById('arraySize');
+    const executionTime = document.getElementById('executionTime');
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        
+        const size = parseInt(formData.get('size') as string);
+        const testCase = formData.get('case') as 'sorted' | 'random' | 'reversed';
+
+        // Create array based on test case
+        const array = createSortArray(size, testCase);
+        const { sortedArray, executionTime: time } = await runBubbleSort(array);
+
+        // Display results
+        results?.classList.remove('hidden');
+        if (inputArray) {
+            inputArray.textContent = `[${array.slice(0, 10).join(', ')}${array.length > 10 ? ', ...' : ''}] (${array.length.toLocaleString()} elements)`;
+        }
+        if (outputArray) {
+            outputArray.textContent = `[${sortedArray.slice(0, 10).join(', ')}${sortedArray.length > 10 ? ', ...' : ''}] (${sortedArray.length.toLocaleString()} elements)`;
+        }
+        if (arraySize) {
+            arraySize.textContent = size.toLocaleString() + ' elements';
+        }
+        if (executionTime) {
+            executionTime.textContent = `${time.toFixed(2)}ms`;
+        }
+    });
+});
+</script>
