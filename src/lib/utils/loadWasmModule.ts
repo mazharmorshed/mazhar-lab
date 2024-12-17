@@ -1,4 +1,5 @@
 import type { LabModule } from '@/types/LabModule.type';
+import { baseURL } from './baseURL';
 
 let wasmModule: LabModule | null = null;
 let wasmMemory: WebAssembly.Memory | null = null;
@@ -48,7 +49,7 @@ export async function loadWasmModule(): Promise<LabModule> {
       },
     };
 
-    const response = await fetch(`/wasm/lab.wasm`);
+    const response = await fetch(`${baseURL}/wasm/lab.wasm`);
     const result = await WebAssembly.instantiateStreaming(response, {
       env: env,
       wasi_snapshot_preview1: {},  // Add if using WASI

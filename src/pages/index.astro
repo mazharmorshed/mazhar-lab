@@ -3,12 +3,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Code, Cpu, Brain, Database, ArrowRight, Github, Zap, BookOpen, Star } from 'lucide-react';
-
-// Add preload hints
-const preloads = [
-    { href: '/fonts/your-font.woff2', as: 'font', type: 'font/woff2', crossorigin: true },
-    { href: '/critical.css', as: 'style' },
-];
+import { baseURL } from '@/lib/utils/baseURL';
 
 // Meta data
 const meta = {
@@ -19,11 +14,6 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-    {/* Skip Link for Accessibility */}
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-background px-4 py-2 rounded-md">
-        Skip to main content
-    </a>
-
     <div class="mx-auto space-y-12" id="main-content">
         {/* Hero Section */}
         <section 
@@ -36,18 +26,6 @@ const meta = {
                             Mazhar Lab
                         </h1>
                         <Badge variant="outline" className="animate-fade-in [--animation-delay:200ms]">Beta</Badge>
-                        <div class="flex items-center gap-2 ml-auto animate-fade-in [--animation-delay:300ms]">
-                            <a 
-                                href="https://github.com/mazharmorshed/mazhar-lab"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                <Star className="h-4 w-4" />
-                                <span>Star</span>
-                                <Badge variant="secondary" className="text-xs">120+</Badge>
-                            </a>
-                        </div>
                     </div>
                     <p class="text-xl text-muted-foreground max-w-2xl animate-fade-in [--animation-delay:400ms]">
                         A comprehensive computer science reference implemented in C++/WebAssembly
@@ -107,7 +85,7 @@ const meta = {
                             View on GitHub
                         </a>
                         <a 
-                            href="/algorithms" 
+                            href=`${baseURL}/algorithms/searching/linear-search` 
                             class="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
                         >
                             Start Learning
@@ -127,7 +105,7 @@ const meta = {
                 <Badge variant="outline" className="px-3">Categories</Badge>
             </div>
             <div class="grid gap-6 md:grid-cols-2">
-                <a href="/algorithms" class="block group">
+                <a href=`${baseURL}/algorithms/searching/linear-search` class="block group">
                     <Card className="relative overflow-hidden p-6 space-y-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         <div class="space-y-2">
                             <div class="flex items-center gap-3">
@@ -288,7 +266,7 @@ const meta = {
                     <h2 class="text-2xl font-bold mb-4">Ready to Start Learning?</h2>
                     <p class="mb-6 text-primary-foreground/90">Begin your journey with our algorithms section</p>
                     <a 
-                        href="/algorithms" 
+                        href=`${baseURL}/algorithms/searching/linear-search`
                         class="inline-flex items-center justify-center gap-2 rounded-md bg-background px-6 py-3 text-sm font-medium text-primary hover:bg-accent transition-all group-hover:scale-105 duration-300"
                     >
                         Start Learning

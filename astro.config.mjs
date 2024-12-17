@@ -12,6 +12,8 @@ const execAsync = promisify(exec);
 
 // https://astro.build/config
 export default defineConfig({
+  base: '/mazhar-lab', 
+  site: 'https://mazharmorshed.github.io/mazhar-lab',
   vite: {
     plugins: [
       wasm(),

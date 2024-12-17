@@ -1,5 +1,6 @@
 # Mazhar Lab
 
+![Mazhar Lab](https://mazharmorshed.github.io/mazhar-lab/mazhar-lab-social-image.png)
 A computer science reference implementation with interactive algorithm visualizations and WebAssembly-powered examples.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue.svg)](https://www.typescriptlang.org/)
@@ -53,13 +54,6 @@ A computer science reference implementation with interactive algorithm visualiza
 └── scripts/               # Build scripts
 ```
 
-## Reference Topics
-
-- **Algorithms**: Sorting, Searching, Graph Algorithms
-- **Data Structures**: Arrays, Trees, Hash Maps
-- **Systems**: Processes, Networking, OS Concepts
-- **AI & Math**: Machine Learning, Neural Networks
-
 ## Commands
 
 | Command | Action |
@@ -80,10 +74,4 @@ A computer science reference implementation with interactive algorithm visualiza
 2. Run `npm run build:wasm`
 3. Import the `.wasm` module in TypeScript
 
-## License
-
-MIT License - see [LICENSE](LICENSE) file
-
-## Contact
-
-Project Link: [https://github.com/mazhar11-cou/mazhar-lab](https://github.com/mazhar11-cou/mazhar-lab)
+Project Link: [https://github.com/mazharmorshed/mazhar-lab](https://github.com/mazharmorshed/mazhar-lab)

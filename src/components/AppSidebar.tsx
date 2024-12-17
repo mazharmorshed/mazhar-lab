@@ -17,6 +17,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useEffect, useState } from "react"
+import { baseURL } from "@/lib/utils/baseURL"
 
 interface SubItem {
   label: string;
@@ -53,7 +54,7 @@ export function AppSidebar() {
           subitems: [
             {
               label: "Linear Search",
-              href: "/algorithms/searching/linear-search",
+              href: "algorithms/searching/linear-search",
             }
           ]
         },
@@ -63,7 +64,7 @@ export function AppSidebar() {
           subitems: [
             {
               label: "Bubble Sort",
-              href: "/algorithms/sorting/bubble-sort",
+              href: "algorithms/sorting/bubble-sort",
             }
           ]
         }
@@ -102,7 +103,7 @@ export function AppSidebar() {
                       className="w-full justify-start"
                       asChild
                     >
-                      <a href="/">
+                      <a href={`${baseURL}`}>
                         <Home className="mr-2 h-4 w-4" />
                         Home
                       </a>
@@ -157,7 +158,7 @@ export function AppSidebar() {
                                         )}
                                         asChild
                                       >
-                                        <a href={subitem.href}>
+                                        <a href={`${baseURL}/${subitem.href}`}>
                                           <ChevronRight className="mr-2 h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                                           <span className="truncate">{subitem.label}</span>
                                         </a>
