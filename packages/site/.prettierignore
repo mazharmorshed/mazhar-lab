@@ -1,0 +1,5 @@
+dist
+node_modules
+.astro
+public/wasm/mlab_core.js
+public/wasm/mlab_core.wasm 

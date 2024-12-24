@@ -1,0 +1,308 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import { CodeBlock } from '@/components/ui/code-block'
+import { getSourceFile } from '@/lib/utils/getSourceFile'
+import { Card } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { LinearSearchDemo } from '@/components/demos/algorithms/search/LinearSearchDemo'
+
+const linearSearchSource = getSourceFile('linear_search.cpp')
+---
+
+<PageLayout>
+  <article class="mx-auto max-w-[1200px] space-y-8">
+    {/* Title and Introduction */}
+    <section class="mb-12 space-y-12">
+      <div class="space-y-4">
+        <div class="space-y-2">
+          <h1 class="mb-4 text-4xl font-bold">Linear Search Algorithm</h1>
+          <div class="flex flex-wrap gap-2">
+            <Badge variant="outline" className="px-3">
+              <span class="font-semibold">Category:</span>
+              <span class="ml-1">Search</span>
+            </Badge>
+          </div>
+        </div>
+
+        <Card className="space-y-4 p-6">
+          <h2 class="text-lg font-semibold">Overview</h2>
+          <p class="text-muted-foreground">
+            Linear Search is the simplest searching algorithm that sequentially checks each element
+            in a list until a match is found or the whole list has been searched. While not the most
+            efficient for large datasets, it's straightforward to implement and works on both sorted
+            and unsorted arrays.
+          </p>
+          <h4 class="text-lg font-semibold">Key Characteristics</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <div
+                class="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary/10"
+              >
+                <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+              </div>
+              <span class="text-muted-foreground"
+                >Time Complexity: O(n) in worst and average case, O(1) in best case</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <div
+                class="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary/10"
+              >
+                <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+              </div>
+              <span class="text-muted-foreground">Space Complexity: O(1) auxiliary space</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div
+                class="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary/10"
+              >
+                <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+              </div>
+              <span class="text-muted-foreground">Works on both sorted and unsorted arrays</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div
+                class="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary/10"
+              >
+                <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+              </div>
+              <span class="text-muted-foreground">Early termination when target is found</span>
+            </li>
+          </ul>
+        </Card>
+
+        <Card className="bg-muted/50 p-4">
+          <div class="flex items-center gap-4">
+            <div
+              class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-primary/10"
+            >
+              <div class="h-2 w-2 rounded-full bg-primary"></div>
+            </div>
+            <p class="text-sm text-muted-foreground">
+              <span class="font-medium">Pro Tip:</span> While not efficient for large datasets, Linear
+              Search is ideal for small collections and when the target is likely to be found near the
+              start of the array.
+            </p>
+          </div>
+        </Card>
+      </div>
+    </section>
+
+    {/* Algorithm Steps */}
+    <section class="mb-12 space-y-4">
+      <h2 class="text-2xl font-semibold">Algorithm Steps</h2>
+      <Card className="p-6">
+        <ol class="space-y-6">
+          <li class="relative pl-8">
+            <div
+              class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium"
+            >
+              1
+            </div>
+            <div class="space-y-2">
+              <h4 class="font-medium leading-none">Start at First Element</h4>
+              <p class="text-sm text-muted-foreground">
+                Begin at index 0 of the array and prepare to compare elements with the target value.
+              </p>
+            </div>
+          </li>
+          <li class="relative pl-8">
+            <div
+              class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium"
+            >
+              2
+            </div>
+            <div class="space-y-2">
+              <h4 class="font-medium leading-none">Compare Current Element</h4>
+              <p class="text-sm text-muted-foreground">
+                Compare the current element with the target value. If they match, return the current
+                index.
+              </p>
+            </div>
+          </li>
+          <li class="relative pl-8">
+            <div
+              class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium"
+            >
+              3
+            </div>
+            <div class="space-y-2">
+              <h4 class="font-medium leading-none">Move to Next Element</h4>
+              <p class="text-sm text-muted-foreground">
+                If no match is found, move to the next element in the array and repeat the
+                comparison.
+              </p>
+            </div>
+          </li>
+          <li class="relative pl-8">
+            <div
+              class="absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-sm font-medium"
+            >
+              4
+            </div>
+            <div class="space-y-2">
+              <h4 class="font-medium leading-none">Check Array Bounds</h4>
+              <p class="text-sm text-muted-foreground">
+                Continue until either the target is found or the end of the array is reached.
+              </p>
+            </div>
+          </li>
+          <li class="relative pl-8">
+            <div
+              class="border-warning absolute left-0 flex h-6 w-6 items-center justify-center rounded-full border bg-background text-sm font-medium"
+            >
+              ✓
+            </div>
+            <div class="space-y-2">
+              <h4 class="font-medium leading-none">Return Result</h4>
+              <p class="text-sm text-muted-foreground">
+                Return the found index or -1 if the target is not found in the array.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </Card>
+    </section>
+
+    {/* Implementations */}
+    <section class="mb-12 space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-semibold">Implementations</h2>
+        <Badge variant="outline" className="px-3">2 Versions</Badge>
+      </div>
+
+      <div class="grid gap-8">
+        {/* Basic Implementation */}
+        <Card className="overflow-hidden">
+          <div class="border-b p-6">
+            <div class="mb-4 flex items-center justify-between">
+              <h3 class="text-xl font-semibold">Basic Implementation</h3>
+              <Badge>C-Style</Badge>
+            </div>
+            <p class="text-muted-foreground">
+              A straightforward C-style implementation using WASM bindings. This version focuses on
+              clarity and simplicity, making it easy to understand the core algorithm.
+            </p>
+          </div>
+
+          <div class="border-b bg-muted/5 p-6">
+            {
+              linearSearchSource && (
+                <CodeBlock
+                  code={linearSearchSource.code}
+                  filename={linearSearchSource.path}
+                  client:visible
+                />
+              )
+            }
+          </div>
+
+          {/* Demo attached to Basic Implementation */}
+          <div class="border-t bg-muted/5 p-6">
+            <h4 class="mb-4 text-lg font-semibold">Try It Out</h4>
+            <LinearSearchDemo client:visible />
+          </div>
+        </Card>
+
+        {/* Modern Implementation */}
+        <Card className="overflow-hidden">
+          <div class="border-b p-6">
+            <div class="mb-4 flex items-center justify-between">
+              <h3 class="text-xl font-semibold">Modern Implementation</h3>
+              <Badge>C++ STL</Badge>
+            </div>
+            <p class="text-muted-foreground">
+              A more idiomatic C++ implementation using STL features. This version shows how to
+              write the same algorithm in a more maintainable and type-safe way.
+            </p>
+          </div>
+
+          <div class="border-b bg-muted/5 p-6"></div>
+        </Card>
+      </div>
+    </section>
+
+    {/* Performance Analysis */}
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-semibold">Performance Analysis</h2>
+        <Badge variant="outline" className="px-3">
+          <span class="font-semibold">Overall:</span>
+          <span class="ml-1">O(n)</span>
+        </Badge>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <Card className="p-6">
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                <div class="h-4 w-4 rounded-sm bg-primary/60"></div>
+              </div>
+              <h3 class="text-lg font-semibold">Time Complexity</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-medium">Best Case</span>
+                  <Badge variant="outline" className="bg-success/10 text-success">O(1)</Badge>
+                </div>
+                <p class="text-sm text-muted-foreground">Target found at first position</p>
+              </li>
+              <li class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-medium">Average Case</span>
+                  <Badge variant="outline" className="bg-warning/10 text-warning">O(n)</Badge>
+                </div>
+                <p class="text-sm text-muted-foreground">
+                  Target found at random position, requires n/2 comparisons on average
+                </p>
+              </li>
+              <li class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-medium">Worst Case</span>
+                  <Badge variant="outline" className="bg-destructive/10 text-destructive"
+                    >O(n)</Badge
+                  >
+                </div>
+                <p class="text-sm text-muted-foreground">
+                  Target not found or at last position, requires n comparisons
+                </p>
+              </li>
+            </ul>
+          </div>
+        </Card>
+
+        <Card className="p-6">
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                <div class="h-4 w-4 rounded-sm bg-primary/60"></div>
+              </div>
+              <h3 class="text-lg font-semibold">Space Complexity</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-medium">Auxiliary Space</span>
+                  <Badge variant="outline" className="bg-success/10 text-success">O(1)</Badge>
+                </div>
+                <p class="text-sm text-muted-foreground">
+                  Only requires a few variables regardless of input size
+                </p>
+              </li>
+              <li class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-medium">In-Place</span>
+                  <Badge variant="outline" className="bg-success/10 text-success">Yes</Badge>
+                </div>
+                <p class="text-sm text-muted-foreground">Does not modify the input array</p>
+              </li>
+            </ul>
+          </div>
+        </Card>
+      </div>
+    </section>
+  </article>
+</PageLayout>
+

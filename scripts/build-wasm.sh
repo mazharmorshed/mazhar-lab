@@ -1,38 +1,34 @@
 #!/bin/bash
-
 set -e
 
-CPP_DIR="src/cpp"
-WASM_DIR="build"
-PUBLIC_WASM_DIR="public/wasm"
+# Save current directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ROOT_DIR="$( cd "$SCRIPT_DIR/.." && pwd )"
+
+# Directories
+CPP_DIR="$ROOT_DIR/packages/mlab"
+WASM_DIR="$ROOT_DIR/packages/site/public/wasm"
+BUILD_DIR="$CPP_DIR/build-wasm"
 
 # Create necessary directories
-mkdir -p $WASM_DIR $PUBLIC_WASM_DIR
+mkdir -p $WASM_DIR
+mkdir -p $BUILD_DIR
 
-# Collect all .cpp files
-cpp_files=""
-for file in $(find $CPP_DIR -name '*.cpp'); do
-    cpp_files="$cpp_files $file"
-done
+# Navigate to build directory
+cd $BUILD_DIR
 
-# Output directories
-wasm_output_dir="$WASM_DIR"
-public_output_dir="$PUBLIC_WASM_DIR"
+# Configure CMake for Emscripten
+emcmake cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake \
+    -DBUILD_CLI=OFF \
+    -DBUILD_WASM=ON
 
-mkdir -p $wasm_output_dir $public_output_dir
+# Build the project
+emmake cmake --build .
 
-# Compile all C++ files into a single module
-emcc $cpp_files -o $wasm_output_dir/lab.js \
-    -s MODULARIZE \
-    -s EXPORT_NAME="labModule" \
-    -s ENVIRONMENT=web \
-    -s ALLOW_MEMORY_GROWTH=1 \
-    -s INITIAL_MEMORY=32MB \
-    -s MAXIMUM_MEMORY=512MB \
-    -s EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'HEAP32']" \
-    -s EXPORTED_FUNCTIONS="['_bubble_sort', '_malloc', '_free']"
-
-# Copy WASM/JS files to the public directory
-cp $wasm_output_dir/lab.{js,wasm} $public_output_dir/
+# Copy WASM files to public directory
+mv $BUILD_DIR/mlab_core.js $WASM_DIR/mlab_core.js
+mv $BUILD_DIR/mlab_core.wasm $WASM_DIR/mlab_core.wasm
 
 echo "WASM build complete!"
